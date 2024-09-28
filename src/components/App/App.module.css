@@ -22,14 +22,6 @@
   padding: 0 15px;
 }
 
-.link {
-  text-decoration: none;
-}
-
-.active {
-  color: rosybrown;
-}
-
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);

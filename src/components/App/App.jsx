@@ -1,50 +1,22 @@
-import { useState } from "react";
-import { NavLink, Route, Routes } from "react-router-dom";
-import { clsx } from "clsx";
-import css from "./App.module.css";
+import { Route, Routes } from "react-router-dom";
 import Home from "../../pages/Home/Home";
 import About from "../../pages/About/About";
+import Product from "../../pages/Product/Product";
 import NotFound from "../../pages/NotFound/NotFound";
-
-const getNavLinkClass = (props) => {
-  return clsx(css.link, props.isActive && css.active);
-};
+import Navigation from "../Navigation/Navigation";
+import css from "./App.module.css";
 
 export default function App() {
-  // const [count, setCount] = useState(0);
-
   return (
     <>
-      <div className={css.container}>
-        <ul>
-                    <li>
-            <NavLink to="/" className={getNavLinkClass}>
-              About
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/about" className={getNavLinkClass}>
-              About
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/product" className={getNavLinkClass}>
-              Product
-            </NavLink>
-          
-          </li>
-        </ul>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-
+      <Navigation />
       <Routes>
-        <Route path="/" element={ <Home /> } />
-        <Route path="/about" element={ <About /> } />
-        <Route path="/product" element={ } />
-        <Route path="*" element={ <NotFound /> } />
-    </Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <h1> Hello!</h1>
     </>
   );
 }

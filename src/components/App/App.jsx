@@ -1,22 +1,22 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "../../pages/Home/Home";
-import About from "../../pages/About/About";
-import Product from "../../pages/Product/Product";
-import NotFound from "../../pages/NotFound/NotFound";
+import HomePage from "../../pages/HomePage/HomePage";
+import MovieDetailsPage from "../../pages/MovieDetailsPage/MovieDetailsPage";
+import MoviesPage from "../../pages/MoviesPage/MoviesPage";
+import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 import Navigation from "../Navigation/Navigation";
 import css from "./App.module.css";
 
 export default function App() {
   return (
-    <>
+    <div className={css.container}>
       <Navigation />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/product" element={<Product />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/movies" element={<MoviesPage />} />
+        <Route path="/about" element={<MovieDetailsPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <h1> Hello!</h1>
-    </>
+    </div>
   );
 }

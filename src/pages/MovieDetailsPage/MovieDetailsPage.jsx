@@ -1,4 +1,4 @@
-export default function About() {
+export default function MovieDetailsPage() {
   return (
     <section>
       <p>сторінка About</p>

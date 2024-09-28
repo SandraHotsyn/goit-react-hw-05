@@ -1,6 +1,6 @@
-// import css from "./Home.module.css";
+// import css from "./HomePage.module.css";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <section>
       <p>сторінка Home</p>

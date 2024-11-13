@@ -1,0 +1,36 @@
+.section {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.error {
+  color: red;
+  font-size: 1em;
+}
+
+.movieDetails {
+  display: flex;
+  gap: 20px;
+}
+
+.movieImage {
+  width: 300px;
+  border-radius: 10px;
+}
+
+.movieInfo {
+  flex: 1;
+  color: #555;
+  font-size: 1em;
+}
+
+.movieInfo p {
+  margin: 10px 0;
+}

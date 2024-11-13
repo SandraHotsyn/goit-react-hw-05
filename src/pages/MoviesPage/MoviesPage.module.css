@@ -1,0 +1,86 @@
+.section {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.searchForm {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.searchInput {
+  padding: 10px;
+  font-size: 1em;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+}
+
+.searchButton {
+  padding: 10px 20px;
+  font-size: 1em;
+  color: rgb(100, 9, 62);
+  background-color: #bc8f8f;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.searchButton:hover {
+  background-color: rgb(100, 9, 62);
+  color: #bc8f8f;
+}
+
+.error {
+  color: red;
+  font-size: 1em;
+  margin-top: 10px;
+}
+
+.moviesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.movieCard {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+
+.movieCard:hover {
+  transform: translateY(-5px);
+}
+
+.movieTitle {
+  font-size: 1.1em;
+  margin: 10px 0;
+  color: #333;
+}
+
+.movieImage {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.movieRating {
+  font-size: 0.9em;
+  color: #555;
+}

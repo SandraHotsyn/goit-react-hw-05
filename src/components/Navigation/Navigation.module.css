@@ -1,7 +1,21 @@
 .link {
   text-decoration: none;
+  padding: 10px;
+  border: 1px solid #bc8f8f;
+  border-radius: 5px;
+  font-size: 22px;
+  transition: all 0.3s;
+  color: #bc8f8f;
+}
+a:hover {
+  color: rgb(100, 9, 62);
 }
 
 .active {
-  color: rosybrown;
+  background-color: #bc8f8f;
+}
+
+a.active {
+  color: rgb(100, 9, 62);
+  border-color: rgb(100, 9, 62);
 }

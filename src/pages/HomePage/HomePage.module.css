@@ -1,0 +1,34 @@
+.section {
+  padding: 20px;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.moviesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.movieCard {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.movieTitle {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+.movieImage {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.movieRating {
+  font-weight: bold;
+}

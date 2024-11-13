@@ -19,7 +19,7 @@ export default function MovieDetailsPage({ apiUrl, apiToken, imageBaseUrl }) {
           params: { language: "en-US" },
         });
         setMovie(response.data);
-      } catch (err) {
+      } catch {
         setError("Error fetching movie details. Please try again.");
       } finally {
         setLoading(false);

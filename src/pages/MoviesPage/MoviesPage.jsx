@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import styles from "./MoviesPage.module.css";
+import { Link } from "react-router-dom";
 
 export default function MoviesPage({ apiUrl, apiToken, imageBaseUrl }) {
   const [query, setQuery] = useState("");
@@ -56,7 +57,11 @@ export default function MoviesPage({ apiUrl, apiToken, imageBaseUrl }) {
       {error && <p className={styles.error}>{error}</p>}
       <div className={styles.moviesGrid}>
         {movies.map((movie) => (
-          <div key={movie.id} className={styles.movieCard}>
+          <Link
+            to={`/movies/${movie.id}`}
+            key={movie.id}
+            className={styles.movieCard}
+          >
             <h2 className={styles.movieTitle}>{movie.title}</h2>
             <img
               src={`${imageBaseUrl}${movie.poster_path}`}
@@ -64,7 +69,7 @@ export default function MoviesPage({ apiUrl, apiToken, imageBaseUrl }) {
               className={styles.movieImage}
             />
             <p className={styles.movieRating}>Rating: {movie.vote_average}</p>
-          </div>
+          </Link>
         ))}
       </div>
     </section>

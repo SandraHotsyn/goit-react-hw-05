@@ -3,7 +3,7 @@
 export default function HomePage() {
   return (
     <section>
-      <p>сторінка Home</p>
+      <p>Домашня сторінка із списком популярних кінофільмів</p>
     </section>
   );
 }

@@ -3,7 +3,9 @@
 export default function MoviesPage() {
   return (
     <section>
-      <p>сторінка MoviesPage</p>
+      <p>
+        Компонент MoviesPage, сторінка пошуку кінофільмів за ключовим словом
+      </p>
     </section>
   );
 }

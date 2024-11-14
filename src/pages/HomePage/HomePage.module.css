@@ -1,15 +1,11 @@
-.section {
-  padding: 20px;
-}
-
 .title {
   font-size: 2rem;
   margin-bottom: 20px;
 }
 
 .moviesGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  display: flex;
+
   gap: 20px;
 }
 

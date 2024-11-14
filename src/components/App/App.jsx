@@ -4,6 +4,8 @@ import MovieDetailsPage from "../../pages/MovieDetailsPage/MovieDetailsPage";
 import MoviesPage from "../../pages/MoviesPage/MoviesPage";
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 import Navigation from "../Navigation/Navigation";
+import MovieCast from "../MovieCast/MovieCast";
+import MovieReviews from "../../components/MovieReviews/MovieReviews";
 import css from "./App.module.css";
 import { useEffect } from "react";
 import axios from "axios";
@@ -59,7 +61,22 @@ export default function App() {
               imageBaseUrl={IMAGE_BASE_URL}
             />
           }
-        />
+        >
+          <Route
+            path="cast"
+            element={
+              <MovieCast
+                apiUrl={API_URL}
+                apiToken={API_TOKEN}
+                imageBaseUrl={IMAGE_BASE_URL}
+              />
+            }
+          />
+          <Route
+            path="reviews"
+            element={<MovieReviews apiUrl={API_URL} apiToken={API_TOKEN} />}
+          />
+        </Route>
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

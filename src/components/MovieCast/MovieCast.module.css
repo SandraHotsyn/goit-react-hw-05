@@ -1,0 +1,52 @@
+.castSection {
+  padding: 20px;
+  margin-top: 40px;
+  border-top: 1px solid #ccc;
+}
+
+.title {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.castGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.actorCard {
+  text-align: center;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.actorImage {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.actorInfo {
+  color: #555;
+}
+
+.actorName {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.characterName {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.error {
+  color: red;
+  font-size: 1em;
+}

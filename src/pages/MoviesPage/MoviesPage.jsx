@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import styles from "./MoviesPage.module.css";
-import { Link } from "react-router-dom";
+import MovieList from "../../components/MovieList/MovieList";
 
 export default function MoviesPage({ apiUrl, apiToken, imageBaseUrl }) {
   const [query, setQuery] = useState("");
@@ -14,14 +14,8 @@ export default function MoviesPage({ apiUrl, apiToken, imageBaseUrl }) {
     setError(null);
     try {
       const response = await axios.get(`${apiUrl}/search/movie`, {
-        headers: {
-          Authorization: apiToken,
-        },
-        params: {
-          query,
-          language: "en-US",
-          include_adult: false,
-        },
+        headers: { Authorization: apiToken },
+        params: { query, language: "en-US", include_adult: false },
       });
       setMovies(response.data.results || []);
     } catch {
@@ -55,23 +49,7 @@ export default function MoviesPage({ apiUrl, apiToken, imageBaseUrl }) {
       </form>
       {loading && <p>Loading...</p>}
       {error && <p className={styles.error}>{error}</p>}
-      <div className={styles.moviesGrid}>
-        {movies.map((movie) => (
-          <Link
-            to={`/movies/${movie.id}`}
-            key={movie.id}
-            className={styles.movieCard}
-          >
-            <h2 className={styles.movieTitle}>{movie.title}</h2>
-            <img
-              src={`${imageBaseUrl}${movie.poster_path}`}
-              alt={movie.title}
-              className={styles.movieImage}
-            />
-            <p className={styles.movieRating}>Rating: {movie.vote_average}</p>
-          </Link>
-        ))}
-      </div>
+      <MovieList movies={movies} imageBaseUrl={imageBaseUrl} />
     </section>
   );
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link, Outlet } from "react-router-dom";
 import axios from "axios";
 import styles from "./MovieDetailsPage.module.css";
 
@@ -7,7 +7,7 @@ export default function MovieDetailsPage({ apiUrl, apiToken, imageBaseUrl }) {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -28,36 +28,51 @@ export default function MovieDetailsPage({ apiUrl, apiToken, imageBaseUrl }) {
 
     fetchMovieDetails();
   }, [apiUrl, apiToken, movieId]);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p className={styles.error}>{error}</p>;
-  if (!movie) return <p>Movie not found.</p>;
-
   return (
     <section className={styles.section}>
-      <h1 className={styles.title}>{movie.title}</h1>
-      <div className={styles.movieDetails}>
-        <img
-          src={`${imageBaseUrl}${movie.poster_path}`}
-          alt={movie.title}
-          className={styles.movieImage}
-        />
-        <div className={styles.movieInfo}>
-          <p>
-            <strong>Release Date:</strong> {movie.release_date}
-          </p>
-          <p>
-            <strong>Rating:</strong> {movie.vote_average}
-          </p>
-          <p>
-            <strong>Overview:</strong> {movie.overview}
-          </p>
-          <p>
-            <strong>Genres:</strong>{" "}
-            {movie.genres.map((genre) => genre.name).join(", ")}
-          </p>
+      <h1 className={styles.title}>Movie details</h1>
+
+      {loading && <p>Завантаження...</p>}
+      {error && <p className={styles.error}>{error}</p>}
+      {!loading && !error && movie ? (
+        <div className={styles.movieDetails}>
+          <img
+            src={`${imageBaseUrl}${movie.poster_path}`}
+            alt={movie.title}
+            className={styles.movieImage}
+          />
+          <div className={styles.movieInfo}>
+            <p>
+              <strong>Назва:</strong> {movie.title}
+            </p>
+            <p>
+              <strong>Дата виходу:</strong> {movie.release_date}
+            </p>
+            <p>
+              <strong>Рейтинг:</strong> {movie.vote_average}
+            </p>
+            <p>
+              <strong>Опис:</strong> {movie.overview}
+            </p>
+            <p>
+              <strong>Жанри:</strong>{" "}
+              {movie.genres.map((genre) => genre.name).join(", ")}
+            </p>
+          </div>
         </div>
-      </div>
+      ) : (
+        !loading && !movie && <p>Фільм не знайдено.</p>
+      )}
+
+      <nav>
+        <Link to="cast" className={styles.link}>
+          Cast
+        </Link>
+        <Link to="reviews" className={styles.link}>
+          Reviews
+        </Link>
+      </nav>
+      <Outlet />
     </section>
   );
 }

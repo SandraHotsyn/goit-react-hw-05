@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import { useParams, Link, Outlet } from "react-router-dom";
+import {
+  useParams,
+  Link,
+  Outlet,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import axios from "axios";
 import styles from "./MovieDetailsPage.module.css";
 
@@ -8,6 +14,10 @@ export default function MovieDetailsPage({ apiUrl, apiToken, imageBaseUrl }) {
   const [movie, setMovie] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const previousLocation = location.state?.from || "/movies";
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -28,8 +38,16 @@ export default function MovieDetailsPage({ apiUrl, apiToken, imageBaseUrl }) {
 
     fetchMovieDetails();
   }, [apiUrl, apiToken, movieId]);
+
   return (
     <section className={styles.section}>
+      <button
+        onClick={() => navigate(previousLocation)}
+        className={styles.backButton}
+      >
+        Go back
+      </button>
+
       <h1 className={styles.title}>Movie details</h1>
 
       {loading && <p>Завантаження...</p>}
@@ -65,10 +83,18 @@ export default function MovieDetailsPage({ apiUrl, apiToken, imageBaseUrl }) {
       )}
 
       <nav>
-        <Link to="cast" className={styles.link}>
+        <Link
+          to="cast"
+          className={styles.link}
+          state={{ from: previousLocation }}
+        >
           Cast
         </Link>
-        <Link to="reviews" className={styles.link}>
+        <Link
+          to="reviews"
+          className={styles.link}
+          state={{ from: previousLocation }}
+        >
           Reviews
         </Link>
       </nav>

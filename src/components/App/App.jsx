@@ -1,14 +1,20 @@
 import { Route, Routes } from "react-router-dom";
-import HomePage from "../../pages/HomePage/HomePage";
-import MovieDetailsPage from "../../pages/MovieDetailsPage/MovieDetailsPage";
-import MoviesPage from "../../pages/MoviesPage/MoviesPage";
-import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 import Navigation from "../Navigation/Navigation";
-import MovieCast from "../MovieCast/MovieCast";
-import MovieReviews from "../../components/MovieReviews/MovieReviews";
 import css from "./App.module.css";
-import { useEffect } from "react";
-import axios from "axios";
+import { Suspense, lazy } from "react";
+
+const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
+const MovieDetailsPage = lazy(() =>
+  import("../../pages/MovieDetailsPage/MovieDetailsPage")
+);
+const MoviesPage = lazy(() => import("../../pages/MoviesPage/MoviesPage"));
+const NotFoundPage = lazy(() =>
+  import("../../pages/NotFoundPage/NotFoundPage")
+);
+const MovieCast = lazy(() => import("../MovieCast/MovieCast"));
+const MovieReviews = lazy(() =>
+  import("../../components/MovieReviews/MovieReviews")
+);
 
 const API_URL = "https://api.themoviedb.org/3";
 const API_TOKEN =
@@ -16,56 +22,16 @@ const API_TOKEN =
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w200";
 
 export default function App() {
-  useEffect(() => {
-    const fetchFilms = async () => {
-      const { data } = await axios.get(API_URL, {
-        headers: { Authorization: API_TOKEN },
-      });
-      console.log("data: ", data);
-    };
-
-    fetchFilms();
-  }, []);
-
   return (
     <div className={css.container}>
-      <h1> Вистраждана Homework 5</h1>
+      <h1>SH-LeandingPage</h1>
       <Navigation />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <HomePage
-              apiUrl={API_URL}
-              apiToken={API_TOKEN}
-              imageBaseUrl={IMAGE_BASE_URL}
-            />
-          }
-        />
-        <Route
-          path="/movies"
-          element={
-            <MoviesPage
-              apiUrl={API_URL}
-              apiToken={API_TOKEN}
-              imageBaseUrl={IMAGE_BASE_URL}
-            />
-          }
-        />
-        <Route
-          path="/movies/:movieId"
-          element={
-            <MovieDetailsPage
-              apiUrl={API_URL}
-              apiToken={API_TOKEN}
-              imageBaseUrl={IMAGE_BASE_URL}
-            />
-          }
-        >
+      <Suspense fallback={<p>Завантаження...</p>}>
+        <Routes>
           <Route
-            path="cast"
+            path="/"
             element={
-              <MovieCast
+              <HomePage
                 apiUrl={API_URL}
                 apiToken={API_TOKEN}
                 imageBaseUrl={IMAGE_BASE_URL}
@@ -73,13 +39,43 @@ export default function App() {
             }
           />
           <Route
-            path="reviews"
-            element={<MovieReviews apiUrl={API_URL} apiToken={API_TOKEN} />}
+            path="/movies"
+            element={
+              <MoviesPage
+                apiUrl={API_URL}
+                apiToken={API_TOKEN}
+                imageBaseUrl={IMAGE_BASE_URL}
+              />
+            }
           />
-        </Route>
-
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+          <Route
+            path="/movies/:movieId"
+            element={
+              <MovieDetailsPage
+                apiUrl={API_URL}
+                apiToken={API_TOKEN}
+                imageBaseUrl={IMAGE_BASE_URL}
+              />
+            }
+          >
+            <Route
+              path="cast"
+              element={
+                <MovieCast
+                  apiUrl={API_URL}
+                  apiToken={API_TOKEN}
+                  imageBaseUrl={IMAGE_BASE_URL}
+                />
+              }
+            />
+            <Route
+              path="reviews"
+              element={<MovieReviews apiUrl={API_URL} apiToken={API_TOKEN} />}
+            />
+          </Route>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
     </div>
   );
 }

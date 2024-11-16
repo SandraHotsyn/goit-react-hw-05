@@ -17,10 +17,12 @@ export default function MovieDetailsPage({ apiUrl, apiToken, imageBaseUrl }) {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const previousLocation = location.state?.from || "/movies";
+  const backLink = location.state?.from || "/movies"; // Отримання попереднього шляху
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
+      setLoading(true);
+      setError(null);
       try {
         const response = await axios.get(`${apiUrl}/movie/${movieId}`, {
           headers: {
@@ -41,11 +43,8 @@ export default function MovieDetailsPage({ apiUrl, apiToken, imageBaseUrl }) {
 
   return (
     <section className={styles.section}>
-      <button
-        onClick={() => navigate(previousLocation)}
-        className={styles.backButton}
-      >
-        Go back
+      <button onClick={() => navigate(backLink)} className={styles.backButton}>
+        ← Go back
       </button>
 
       <h1 className={styles.title}>Movie details</h1>
@@ -86,14 +85,14 @@ export default function MovieDetailsPage({ apiUrl, apiToken, imageBaseUrl }) {
         <Link
           to="cast"
           className={styles.link}
-          state={{ from: previousLocation }}
+          state={{ from: backLink }} // Передача стану для Cast
         >
           Cast
         </Link>
         <Link
           to="reviews"
           className={styles.link}
-          state={{ from: previousLocation }}
+          state={{ from: backLink }} // Передача стану для Reviews
         >
           Reviews
         </Link>
